@@ -17,5 +17,9 @@ export function getPackageInfo () {
 }
 
 export function getRuntimeInfo () {
-  return { node: process.version, uptime: process.uptime() }
+  return {
+    node: process.version,
+    uptime: process.uptime(),
+    env: process.env.NODE_ENV || 'development'
+  }
 }
