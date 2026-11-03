@@ -14,6 +14,7 @@ describe('GET /info', () => {
     expect(typeof res.body.version).toBe('string')
     expect(typeof res.body.node).toBe('string')
     expect(typeof res.body.uptime).toBe('number')
+    expect(typeof res.body.env).toBe('string')
   })
 
   it('has plausible node version & non-negative uptime', async () => {
