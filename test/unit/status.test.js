@@ -9,6 +9,15 @@ describe('formatStatus', () => {
   it('throws on negative', () => {
     expect(() => formatStatus(-1)).toThrow('invalid uptime')
   })
+  it('throws on non-number or NaN', () => {
+    expect(() => formatStatus('abc')).toThrow('invalid uptime')
+    expect(() => formatStatus(NaN)).toThrow('invalid uptime')
+    expect(() => formatStatus(undefined)).toThrow('invalid uptime')
+  })
+  it('switches from warming-up to healthy at 60s', () => {
+    expect(formatStatus(59)).toBe('warming-up')
+    expect(formatStatus(60)).toBe('healthy')
+  })
   it('warming-up under 60s', () => {
     expect(formatStatus(10)).toBe('warming-up')
   })
