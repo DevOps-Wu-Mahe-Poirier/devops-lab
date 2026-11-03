@@ -20,6 +20,16 @@ describe('getRuntimeInfo', () => {
     expect(typeof runtime.uptime).toBe('number')
   })
 
+  it('returns the environment, development by default', () => {
+    const saved = process.env.NODE_ENV
+    delete process.env.NODE_ENV
+    expect(getRuntimeInfo().env).toBe('development')
+    process.env.NODE_ENV = 'production'
+    expect(getRuntimeInfo().env).toBe('production')
+    if (saved === undefined) delete process.env.NODE_ENV
+    else process.env.NODE_ENV = saved
+  })
+
   it('calls process.uptime()', () => {
     const spy = vi.spyOn(process, 'uptime')
     getRuntimeInfo()
